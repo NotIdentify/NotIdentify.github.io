@@ -11,7 +11,7 @@ h1{
 }
 body{
     padding: 20px;
-    background: #211f25 !important;
+    background: linear-gradient(to right, #232526, #414345) !important;/*#211f25 !important; */
     color: white !important;
     height: 100vh;
 }
@@ -20,9 +20,9 @@ pre{
     color: white !important;
 }
 img{
-    position: absolute;
-    width: 50%;
+    width: 100%;
     left: 14em;
+    border-radius: 15px;
 }
 nav{
     /* border-bottom: 0.5px solid rgba(255, 255, 255, 0.363); */
@@ -53,4 +53,10 @@ nav li a:hover{
     position: absolute;
     width: 85%;
     padding: 10px;
+}
+
+.code{
+    background: black;
+    color: white;
+    
 }
