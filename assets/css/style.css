@@ -2,61 +2,61 @@
     padding: 0;
     margin: 0;
 }
-h1{
-    color: #02f195;
-    font-family: sans-serif;
-    font-weight: 100;
-    padding: 15px;
-        
-}
+
 body{
+    height: 100vh;
     padding: 20px;
     background: linear-gradient(to right, #232526, #414345) !important;/*#211f25 !important; */
     color: white !important;
-    height: 100vh;
 }
+
 pre{
     padding: 0 20px;
     color: white !important;
 }
 img{
-    width: 100%;
+    width: 50%;
     left: 14em;
     border-radius: 15px;
 }
-nav{
-    /* border-bottom: 0.5px solid rgba(255, 255, 255, 0.363); */
-    padding: 20px;
-}
- nav li {
-    list-style: none;
-    display: inline;
-    padding: 10px;
-}
-nav li a{
-    text-decoration: none;
+.title-head{
+    color: #02f195;
     font-family: sans-serif;
-    color: #02f195;
-}
-
-nav li a:hover{
-    color: #02f195;
-    text-decoration: none;
-    background: black;
-    padding: 20px;
-    opacity: 0.5;
-    transition: .5s all;
-    border-radius: 10px;
-}
-
+    font-weight: 100;
+    padding: 15px;
+} 
 .content{
-    position: absolute;
-    width: 85%;
-    padding: 10px;
+    width: 80%;
+    padding: 20px;
+    top: 0;
+    bottom:0;
+    position:fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+} 
 
 .code{
-    background: black;
+    background: #232526;
     color: white;
-    
+    padding: 20px;
+    font-size: 15px;
+    height: 600px;
+    width: 100%;
+}
+
+@media only screen and (min-width: 600px){
+    nav{
+        
+    }
 }
