@@ -1,5 +1,5 @@
 
-particlesJS('particles-js',
+particlesJS('nyancat-js',
   
 {
   "particles": {
