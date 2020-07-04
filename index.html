@@ -4,37 +4,91 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Servmon HTB</title>
+	<title>Landing Page</title>
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/font/Alfa-slab/alfaslab.css">
 	<link rel="stylesheet" href="assets/font/Raleway/Raleway.css">
 	<link rel="stylesheet" href="assets/font/josefin-slab/josefin-slab.css">
 </head>
-<body id="particles-js">
-	<div class="content scrollbar">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Navbar</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			  <div class="navbar-nav">
-				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-				<a class="nav-item nav-link" href="#">Features</a>
-				<a class="nav-item nav-link" href="#">Pricing</a>
-				<a class="nav-item nav-link disabled" href="#">Disabled</a>
-			  </div>
-			</div>
-		  </nav>
-		<br><br>
-		<h1 class="title-head" style="font-family: Alfa Slab One;">Coming Soon</h1>
-		<div style="font-family: Josefin Slab;font-size: 25px;">
-			Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime iure est in assumenda ratione illo magnam nesciunt ut, accusamus tempora consectetur nobis? Facilis, distinctio fugiat eum nemo nulla minima voluptatibus modi excepturi maxime quis ab velit in, cumque repellendus nam accusamus, itaque recusandae provident totam nostrum unde dicta eveniet similique! Sint debitis, facilis at vel natus, autem dolor culpa voluptate, laboriosam possimus deserunt veritatis rem quaerat nam! Maiores recusandae exercitationem veritatis accusantium nam aut et asperiores nihil, culpa aliquam facere, minus sequi odit veniam quibusdam a dolorem, iusto aspernatur? Adipisci exercitationem deleniti alias placeat quaerat sunt odio laudantium debitis autem!
-		</div>
-	</div>
+<body>
+
+		<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+				<a class="navbar-brand" href="#">ORESOSEC</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link" href="#contact">Contact</a>
+					<a class="nav-item nav-link" href="#about">About</a>
+					<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							  Content
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							  <a class="dropdown-item" href="#sec">Cracking</a>
+							  <a class="dropdown-item" href="#ctf">CTF-witeup</a>
+							  <a class="dropdown-item" href="#code">Coding</a>
+							  <div class="dropdown-divider"></div>
+							  <a class="dropdown-item" href="#">Something else here</a>
+							</div>
+					</div>
+				</div>
+			</nav>
+			<!-- flat image -->
+			<section id="particles-js" class="section">
+				<div class="caption">
+					<span class="border">
+						oreosec
+					</span>
+				</div>
+			</section>
+			<!-- <div class="bg-dark pointer txt-title"><h1>Our Content</h1></div> -->
+			
+			<section class="section bg-dark" id="sec">
+				<div class="flat-image hidden-right half-circle" id="sec-img" style="transition: .5s all">
+					<img src="assets/img/flat/shield-flat.png" class="flatimage">
+				</div>
+				<div class="read-more">
+					<h1 class="txt-img">Cracking</h1>
+					Access security.. Access security grid <br>
+					YOU DIDN'T SAY THE MAGIC WORD! <br>
+					<a href="#" class="btn btn-success shadow">Read more</a>
+				</div>
+			</section>
+
+			<section class="section" id="ctf">
+				<div class="read-more">
+					<h1 class="txt-img">CTF-witeup</h1>
+					C4n y0u pwn th4 m4ch1n3? <br>
+					<a href="#" class="btn btn-success shadow">Read more</a>
+				</div>
+				<div class="flat-image hidden-left" id="ctf-img" style="transition: 1s all">
+					<img src="assets/img/flat/flag-1648819-1401301.png" class="flatimage">
+				</div>
+			</section>
+			
+			<section class="section bg-dark" id="code">
+				<div class="flat-image hidden-right" id="code-img" style="transition: 1.5s all">
+					<img src="assets/img/flat/color+code+editor-131983707594807873.png" class="flatimage">
+				</div>
+				<div class="read-more">
+					<h1 class="txt-img">Coding</h1>
+					No place like 127.0.0.1 <br>
+					<a href="#" class="btn btn-success shadow">Read more</a>
+				</div>
+			</section>
+
+			<section class="section" id="about">
+				<h1 class="txt-title">Who am i?</h1>
+			</section>
+			<!--  -->
+<center>made with &hearts; by oreosec &copy;2020</center>
 </body>
 <script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/style.js"></script>
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/particles.min.js"></script>
