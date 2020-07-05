@@ -8,24 +8,95 @@
 	<link rel="stylesheet" href="../assets/css/style.css">
 	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
 </head>
-<body id="particles-js">
-	<div class="content scrollbar">
-		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-			<a class="navbar-brand" href="#">Navbar</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			  <span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-			  <div class="navbar-nav">
-				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-				<a class="nav-item nav-link" href="#">Features</a>
-				<a class="nav-item nav-link" href="#">Pricing</a>
-				<a class="nav-item nav-link disabled" href="#">Disabled</a>
-			  </div>
+<body>
+	<header>
+		<div class="collapse bg-dark" id="navbarHeader">
+			<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-md-7 py-4">
+				<h4 class="text-white">About</h4>
+				<p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+				</div>
+				<div class="col-sm-4 offset-md-1 py-4">
+				<h4 class="text-white">Contact</h4>
+				<ul class="list-unstyled">
+					<li><a href="#" class="text-white">Follow on Twitter</a></li>
+					<li><a href="#" class="text-white">Like on Facebook</a></li>
+					<li><a href="#" class="text-white">Email me</a></li>
+				</ul>
+				</div>
 			</div>
-		  </nav>
-		
+			</div>
+		</div>
+		<div class="navbar navbar-dark box-shadow">
+			<div class="container d-flex justify-content-between">
+			<a href="#" class="navbar-brand d-flex align-items-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+				<strong>Content</strong>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			</div>
+		</div>
+	</header>
+	<br><br>
+
+	<div id="particles-js"></div>
+	<div class="container bg-green rounded p-4 shadow-own position-absolute title-article">
+		<h1>servmon htb</h1>
 	</div>
+	<div class="container w-75 p-5 m-5 bg-light rounded text-dark shadow-own" id="article">
+		<h1>This content</h1>
+		<ul class="content-list">
+			<li><a href="#nmap">nmap port scanning</a></li>
+			<li><a href="#">check anonymous ftp</a></li>
+			<li><a href="#">nvms 1000 path traversal</a></li>
+			<li><a href="#">login Nadine ssh</a></li>
+			<li><a href="#">port forward 8443</a></li>
+			<li><a href="#">upload script nsclient++</a></li>
+			<li><a href="#">execute nsclient++ payload</a></li>
+		</ul>
+		<h1>Recon</h1>	
+		
+		<section id="nmap">
+			Pertama tama seperti biasa adalah melakukan scanning port untuk menemukan service yang berjalan menggunakan nmap
+			<br>
+			<kbd> <code>sudo nmap -sCV -oN nmap/serv 10.10.10.184</code> </kbd>
+			<p> <strong>penjelasan:</strong> </p>
+			<ul>
+				<li>-s: Scannimg TCP port mode</li>
+				<li>C: menggunakan common-script pada service yang dituju</li>
+				<li>V: menampilkan version pada service</li>
+				<li>-oN nmap/serv: write output ke dalam file nmap/serv</li>
+				<li>10.10.10.184: IP servmon</li>
+			</ul>
+
+			<img src="../assets/img/servmon/nmap.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Yang menarik disini adalah pada port 21 dan 22 yang sebenarnya jarang pada windows box hmmm...
+		</section>
+		<section id="ftp">
+			Setelah melihat port 21 (ftp) terbuka dan anonymous login dibolehkan maka kita bisa mengeceknya <br>
+			<kbd><code>ftp 10.10.10.184</code></kbd>
+			<ul>
+				<li>username: anonymous</li>
+				<li>password: anonymous</li>
+			</ul>
+			kita bisa mendownload file menggunakan perintah "get". <br>
+			Disini kita mendapatkan 2 file: "Confidential.txt" dan "Notes to do.txt"
+			<img src="../assets/img/servmon/ftp-content.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Oke karna hanya sebuah catatan (baca: hint) maka kita skip dulu.
+		</section>
+		<section id="path-traversal">
+			Karena port 80 terbuka maka langsung saja kita cek web service yang berjalan
+			<img src="../assets/img/servmon/webpage.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Saya langsung mencari exploit nvms-1000 pada searchsploit
+			<img src="../assets/img/servmon/searchsploit.png" class="py-2 rounded mx-auto d-block img-fluid">
+			atau kita bisa membukanya disini <a href="https://www.exploit-db.com/exploits/47774">https://www.exploit-db.com/exploits/47774</a>
+		</section>
+	</div>
+
+
 </body>
 <script src="../assets/js/bootstrap.min.js"></script>
 <script src="../assets/js/jquery.js"></script>
