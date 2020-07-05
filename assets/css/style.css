@@ -26,6 +26,7 @@ nav{
 #article{
     width: 90% !important;
     margin: 50px 30px !important;
+    z-index: 3;
 }
 .bg-green{
     background: linear-gradient(to right, #10ac84,#02f195);
@@ -145,7 +146,7 @@ nav{
     height: 100%;
     width: 100%;
     position: fixed;
-    z-index: -3;
+    z-index: 1;
 }
 .pointer{
     text-align: center;
