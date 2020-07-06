@@ -26,7 +26,9 @@ nav{
 #article{
     width: 90% !important;
     margin: 50px 30px !important;
+    overflow-x: auto;
     z-index: 3;
+    font-family: none !important;
 }
 .bg-green{
     background: linear-gradient(to right, #10ac84,#02f195);

@@ -70,7 +70,7 @@
 			<kbd> <code>sudo nmap -sCV -oN nmap/serv 10.10.10.184</code> </kbd>
 			<p> <strong>penjelasan:</strong> </p>
 			<ul>
-				<li>-s: Scannimg TCP port mode</li>
+				<li>-s: Scanning TCP port mode</li>
 				<li>C: menggunakan common-script pada service yang dituju</li>
 				<li>V: menampilkan version pada service</li>
 				<li>-oN nmap/serv: write output ke dalam file nmap/serv</li>
@@ -120,11 +120,13 @@ nadine@SERVMON C:\Users\Nadine>
 			</div>
 		</section>
 		<section id="port-forward">
-			Disini yang saya lakukan pertama kali adalah melihat program yang terinstall pada Program Files, dan menemukan NSClient++. Saya pun mencarinya menggunakan searchsploit dan yap.. dapat terdapat privilege escalation exploit pada service tersebut.
+			Disini yang saya lakukan pertama kali adalah melihat program yang terinstall pada Program Files, dan menemukan NSClient++. Saya pun mencarinya menggunakan searchsploit dan yap.. dapat!! terdapat privilege escalation exploit pada service tersebut.
 			<img src="../assets/img/servmon/nsclient-exploit.png" class="py-2 rounded mx-auto d-block img-fluid">
 			setelah mengetahui bahwa nsclient++ bekerja pada port 8443, maka saya mencoba melakukan port forward dari ssh ke host pribadi saya. <br>
 			<kbd><code>ssh -L 8443:127.0.0.1:8443 Nadine@10.10.10.184</code></kbd>
-			<br>mengenai tentang port forward ssh kalian bisa membacanya di <a href="https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/">https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/</a>
+			<br>mengenai tentang port forward ssh kalian bisa membacanya di
+			<br>
+			<a href="https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/">https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/</a>
 		</section>
 		<h1>Gaining Root access!!!</h1>
 		<section id="gaining-root">
