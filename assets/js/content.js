@@ -9,7 +9,7 @@ var htmlasli = `
 		</p>
 		<div class="d-flex justify-content-between align-items-center">
 		<div class="btn-group">
-			<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+			<a href="$url$" type="button" class="btn btn-sm btn-outline-secondary">View</a>
 		</div>
 		<small class="text-muted">9 mins</small>
 		</div>
@@ -30,6 +30,7 @@ xmlhttp.onreadystatechange = function() {
 			html = htmlasli.replace("$img$", myArr[i].img)
 			html = html.replace("$title$", myArr[i].title)
 			html = html.replace("$text$", myArr[i].spoiler)
+			html = html.replace("$url$", myArr[i].url)
 			arrayContent.push(html)
 		}
 		// document.getElementById("album").innerHTML = html;

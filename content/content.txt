@@ -7,7 +7,8 @@
 			"ctf",
 			"cracking"
 		],
-		"spoiler": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque a magni sapiente, ducimus magnam excepturi."
+		"spoiler": "Bismillah.. Sebenarnya postingan ini lumayan telat karna mesin sudah retire sekitar seminggu yang lalu...",
+		"url": "servmon-htb-indonesia.html"
 	},
 	{
 		"id": 2,
@@ -17,7 +18,8 @@
 			"ctf",
 			"cracking"
 			],
-		"spoiler": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque a magni sapiente, ducimus magnam excepturi."
+		"spoiler": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque a magni sapiente, ducimus magnam excepturi.",
+		"url": ""
 	},
 	{
 		"id": 2,
@@ -27,6 +29,7 @@
 			"ctf",
 			"cracking"
 			],
-		"spoiler": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque a magni sapiente, ducimus magnam excepturi."
+		"spoiler": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque a magni sapiente, ducimus magnam excepturi.",
+		"url":""
 	}
 ]

