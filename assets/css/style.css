@@ -43,7 +43,6 @@ nav{
 }
 .btn-own:hover{
     background: linear-gradient(to left,#ff8a00,#e52e71) !important;
-    padding: 10px;
 }
 .bg-contain{
     background: #100e17;
