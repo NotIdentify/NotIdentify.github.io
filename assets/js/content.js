@@ -13,13 +13,6 @@ var htmlasli = `
 		</div>
 	</div>
 </div>`
-var htmlasli1 = `
-<div class="cards">
-<div class="card">
-<h2><a href="$url">$title$</a></h2>
-<img src="$mgi$" />
-<p>Larbizard.com is a relevant technoly blog where you can read interesting articles.</p>
-</div>`
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "../content/content.txt", true);
 xmlhttp.send();
