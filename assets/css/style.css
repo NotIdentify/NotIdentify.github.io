@@ -8,7 +8,7 @@ html{
 }
 
 body{
-    background: linear-gradient(to right, #232526, #414345) !important;/*#211f25 !important; */
+    background: #100e17 !important;/*#211f25 !important; */
     color: white !important;
 }
 
@@ -31,7 +31,22 @@ nav{
     font-family: none !important;
 }
 .bg-green{
-    background: linear-gradient(to right, #10ac84,#02f195);
+    background: linear-gradient(to right, #8A2387, #E94057, #F27121);
+}
+.btn-own{
+    background: linear-gradient(to top left,#ff8a00,#e52e71) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: bold !important;
+    font-family: Josefin Slab;
+    transition: .5s all;
+}
+.btn-own:hover{
+    background: linear-gradient(to left,#ff8a00,#e52e71) !important;
+    padding: 10px;
+}
+.bg-contain{
+    background: #100e17;
 }
 .caption {
     position: absolute;
@@ -176,6 +191,40 @@ nav{
 .shadow-own{
     box-shadow: 20px 20px 20px 20px rgba(0, 0, 0, 0.315) !important;
 }
+.album{
+    /* overflow: visible; */
+    display: flex;
+}
+.contain{
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow-x: scroll;
+}
+.card{
+    box-shadow: 0px 0px 50px 0px rgba(0, 0, 0, 0.596) !important;
+    height: 30rem;
+    width: 20em !important; 
+    border-radius: 20px !important;
+}
+.card:not(:first-child){
+    margin-left: -4rem !important;
+}
+.card:hover:not(:first-child){
+    transform: translate(-2rem, -2rem);
+    transition: .5s all;
+}
+
+.card:first-child{
+    text-align: center;
+    writing-mode: vertical-lr;
+    width: 5rem !important;
+}
+.nyamping{
+    font-size: 50px; 
+}
+
 .title-article{
     margin-top: -2rem;
     max-width: 100% !important;
@@ -194,105 +243,13 @@ nav{
     margin: 20px;
 }
 
-.hovereffect {
-  width: 100%;
-  height: 100%;
-  float: left;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  cursor: default;
-}
-
-.hovereffect .overlay {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,0.6);
-  opacity: 0;
-  filter: alpha(opacity=0);
-  -webkit-transform: translate(460px, -100px) rotate(180deg);
-  -ms-transform: translate(460px, -100px) rotate(180deg);
-  transform: translate(460px, -100px) rotate(180deg);
-  -webkit-transition: all 0.2s 0.4s ease-in-out;
-  transition: all 0.2s 0.4s ease-in-out;
-}
-
-.hovereffect img {
-  display: block;
-  height: 85%;
-  width: 100%;
-  position: relative;
-  -webkit-transition: all 0.2s ease-in;
-  transition: all 0.2s ease-in;
-}
-
-.hovereffect h2 {
-  text-transform: uppercase;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  font-size: 17px;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.hovereffect a.info {
-  display: inline-block;
-  text-decoration: none;
-  padding: 7px 14px;
-  text-transform: uppercase;
-  color: #fff;
-  border: 1px solid #fff;
-  margin: 50px 0 0 0;
-  background-color: transparent;
-  -webkit-transform: translateY(-200px);
-  -ms-transform: translateY(-200px);
-  transform: translateY(-200px);
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.hovereffect a.info:hover {
-  box-shadow: 0 0 5px #fff;
-}
-
-.hovereffect:hover .overlay {
-  opacity: 1;
-  filter: alpha(opacity=100);
-  -webkit-transition-delay: 0s;
-  transition-delay: 0s;
-  -webkit-transform: translate(0px, 0px);
-  -ms-transform: translate(0px, 0px);
-  transform: translate(0px, 0px);
-}
-
-.hovereffect:hover h2 {
-  -webkit-transform: translateY(0px);
-  -ms-transform: translateY(0px);
-  transform: translateY(0px);
-  -webkit-transition-delay: 0.5s;
-  transition-delay: 0.5s;
-}
-
-.hovereffect:hover a.info {
-  -webkit-transform: translateY(0px);
-  -ms-transform: translateY(0px);
-  transform: translateY(0px);
-  -webkit-transition-delay: 0.3s;
-  transition-delay: 0.3s;
-}
-
-
-
 @media screen and (max-width: 800px){
-    /* #article{
-        width: 100% !important;
-        margin: 50px 0px !important;
-    } */
+    .card{
+        width: 15rem !important;
+    }
+    .card:first-child{
+        width: 15rem !important;
+    }
     .flatimage{
         width: 70px;
         height: 70px;
@@ -304,12 +261,5 @@ nav{
     .flat-image{
         height: 100px;
         width: 100px;
-    }
-    .gist {
-        width:300px !important;
-    }
-    .gist-file .gist-data {
-        max-height: 500px;
-        max-width: 300px;
     }
 }

@@ -1,34 +1,25 @@
-// var htmlasli1 = `
-// <div class="col-md-4">
-// 	<div class="card mb-4 box-shadow bg-dark shadow">
-// 	<img class="card-img-top" src="$img$" alt="Card image cap">
-// 	<div class="card-body">
-// 		<h5>$title$</h5>
-// 		<p class="card-text text-mute">
-// 			$text$
-// 		</p>
-// 		<div class="d-flex justify-content-between align-items-center">
-// 		<div class="btn-group">
-// 			<a href="$url$" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-// 		</div>
-// 		<small class="text-muted">9 mins</small>
-// 		</div>
-// 	</div>
-// 	</div>
-// </div>`;
-
 var htmlasli = `
-<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-	<div class="hovereffect shadow-own rounded" style="background: linear-gradient(to right, #414345, #232526);">
-        <img class="img-responsive" src="$img$" alt="">
-        <div class="overlay">
-           <h2>$title$</h2>
-           <a class="info" href="$url$" target="_blank">View More</a>
+<div class="card mb-4 col-sm" style="background:#16131c">
+	<div class="card-body">
+		<strong>$title$</strong>
+		<p class="card-text text-muted">
+			
+		</p>
+		<div class="d-flex justify-content-between align-items-center">
+		<div class="btn-group">
+			<a href="$url$" type="button" target="_blank" class="btn btn-sm btn-outline-secondary">View</a>
 		</div>
-		<div class="container bg-green text-center  p-2 ">HOVER ME!</div>
-    </div>
-</div>
-`
+		<small class="text-muted">9 mins</small>
+		</div>
+	</div>
+</div>`
+var htmlasli1 = `
+<div class="cards">
+<div class="card">
+<h2><a href="$url">$title$</a></h2>
+<img src="$mgi$" />
+<p>Larbizard.com is a relevant technoly blog where you can read interesting articles.</p>
+</div>`
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "../content/content.txt", true);
 xmlhttp.send();
@@ -39,6 +30,11 @@ xmlhttp.onreadystatechange = function() {
 		// html = html.replace("$title$", myArr[0].title)
 		// html = html.replace("$text$", myArr[0].spoiler)
 		var arrayContent = [];
+		arrayContent.push(`
+		<div class="mb-4 col-sm tag card" style="background:linear-gradient(#ff8a00,#e52e71);">
+			<strong class="nyamping">CTF WRITE UP</strong>
+		</div>
+		`)
 		for(var i=0; i<myArr.length; i++){
 			html = htmlasli.replace("$img$", myArr[i].img)
 			html = html.replace("$title$", myArr[i].title)
