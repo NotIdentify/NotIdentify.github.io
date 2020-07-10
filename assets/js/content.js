@@ -25,7 +25,7 @@ xmlhttp.onreadystatechange = function() {
 		var arrayContent = [];
 		arrayContent.push(`
 		<div class="mb-4 col-sm tag card" style="background:linear-gradient(#ff8a00,#e52e71);">
-			<strong class="nyamping">CTF WRITE UP</strong>
+			<strong class="nyamping">HackTheBox</strong>
 		</div>
 		`)
 		for(var i=0; i<myArr.length; i++){
