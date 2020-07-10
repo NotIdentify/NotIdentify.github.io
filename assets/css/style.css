@@ -28,7 +28,6 @@ nav{
     margin: 50px 30px !important;
     overflow-x: auto;
     z-index: 3;
-    font-family: none !important;
 }
 .bg-green{
     background: linear-gradient(to right, #8A2387, #E94057, #F27121);
@@ -56,8 +55,8 @@ nav{
     /* transform: translate(-50%, 550%); */
 }
 .caption span.border {
-    border: 1px solid #02f195 !important;
-    color: #02f195;
+    border: 1px solid #ff8a00 !important;
+    color: #ff8a00;
     padding: 18px;
     font-size: 25px;
     letter-spacing: 10px;
@@ -81,7 +80,7 @@ nav{
     overflow-x: hidden;
 }
 .content-list li a{
-    color: #10ac84;
+    color: #e52e71;
 }
 .contact-icon{
     font-size: 5vw;
@@ -235,7 +234,7 @@ nav{
 }
 .txt-title{
     font-family: Raleway;
-    color: #02f195;
+    color: #e52e71;
 }
 .wrapper-flat{
     display: flex;

@@ -2,45 +2,29 @@
 	{
 		"id": 1,
 		"title": "Servmon HTB",
-		"img": "../assets/img/servmon/servmon.png",
 		"category": [
 			"ctf",
 			"cracking"
 		],
-		"url": "servmon-htb-indonesia.html",
-		"text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magni, quasi ullam autem quae dignissimos sint ad reiciendis molestias cum consequuntur dolorem exercitationem doloremque repellat! Nulla at explicabo corrupti accusantium?"
+		"url": "servmon-htb-indonesia.html"
 	},
 	{
 		"id": 2,
 		"title": "Forward Slash HTB",
-		"img": "../assets/img/forwardslash/forwardslash.png",
 		"category": [
 			"ctf",
 			"cracking"
 			],
-		"url": "",
-		"text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magni, quasi ullam autem quae dignissimos sint ad reiciendis molestias cum consequuntur dolorem exercitationem doloremque repellat! Nulla at explicabo corrupti accusantium?"
+		"url": "forwardslash-htb-indonesia.html"
 	},
 	{
-		"id": 2,
-		"title": "Lorem ipsum",
-		"img": "../assets/img/nyan-cat.gif",
+		"id": 3,
+		"title": "Book HTB",
 		"category": [
 			"ctf",
 			"cracking"
 			],
-		"url":"",
-		"text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magni, quasi ullam autem quae dignissimos sint ad reiciendis molestias cum consequuntur dolorem exercitationem doloremque repellat! Nulla at explicabo corrupti accusantium?"
-	},
-	{
-		"id": 2,
-		"title": "Lorem ipsum",
-		"img": "../assets/img/loading.gif",
-		"category": [
-			"ctf",
-			"cracking"
-			],
-		"url":"",
-		"text":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione magni, quasi ullam autem quae dignissimos sint ad reiciendis molestias cum consequuntur dolorem exercitationem doloremque repellat! Nulla at explicabo corrupti accusantium?"
+		"url": "book-htb-indonesia.html"
 	}
+	
 ]

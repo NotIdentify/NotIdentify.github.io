@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Forward Slash HTB</title>
+	<link rel="stylesheet" href="../assets/css/style.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+	<script src="../assets/font/fontawesome-free-5.0.2/svg-with-js/js/fontawesome-all.min.js"></script>
+</head>
+<body>
+	<header>
+		<div class="collapse bg-dark" id="navbarHeader">
+			<div class="container">
+			<div class="row">
+				<div class="col-sm-8 col-md-7 py-4">
+				<h4 class="text-white">About</h4>
+				<p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+				</div>
+				<div class="col-sm-4 offset-md-1 py-4">
+				<h4 class="text-white">Contact</h4>
+				<ul class="list-unstyled">
+					<li><a href="#" class="text-white">Follow on Twitter</a></li>
+					<li><a href="#" class="text-white">Like on Facebook</a></li>
+					<li><a href="#" class="text-white">Email me</a></li>
+				</ul>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="navbar navbar-dark box-shadow">
+			<div class="container d-flex justify-content-between">
+			<a href="#" class="navbar-brand d-flex align-items-center">
+				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+				<strong>Content</strong>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			</div>
+		</div>
+	</header>
+	<br><br>
+
+	<div id="particles-js"></div>
+	<div class="container bg-green rounded p-4 shadow-own position-absolute title-article">
+		<h1>forwardslash htb</h1>
+	</div>
+	<div class="container w-75 p-5 m-5 bg-light rounded text-dark shadow-own" id="article">
+		<i class="far fa-calendar" aria-hidden="true"></i> <small class="text-muted">July 2020</small> <br><br>
+
+		<strong>Bismillah..</strong> <br>
+		Sebagai informasi mesin ini bernama Forward Slash dengan OS linux dengan total 40 points (hard). Adapun seperti biasanya, tantangan dari HackThebox adalah mengambil alih akses penuh mesin (privilege escalation) untuk mendapatkan user.txt dan root.txt <br> <br>
+		<h1>Intro</h1>
+		Box yang relatif tidak terlalu susah (mungkin karna saya beruntung wkwkwk). Perjalanan  Forwardslash dimulai dengan mencari file. Lalu menambahkan subdomain, dan kemudian bypass lfi pada bagian client-side dan filter. Mendapat file yang memiliki kredensial untuk pengguna. File tersebut dimiliki oleh pengguna. Login ssh ke mesin dan enum menggunakan lse, melakukan timestamp dan pada file config.php.bak dengan timestamp itu kami mendapat user credential. Mendapatkan <i>key</i> setelah menganalisis python script. User dapat me-mount gambar dengan hak istimewa root dan karenanya kami mendapat password ssh pribadi dari root pengguna. 
+		<h1>This content</h1>
+		<ul class="content-list">
+			<li><a href="#nmap">Nmap port scanning</a></li>
+			<li><a href="#gobuster">Enum web server</a></li>
+			<li><a href="#lfi">LFI</a></li>
+			<li><a href="#user">Gaining user</a></li>
+			<li><a href="#gaining-root">Gaining root</a></li>
+		</ul>
+		<h1>Recon</h1>	
+		
+		<section id="nmap">
+			<kbd><code>nmap -sCV -oN nmap/serv</code></kbd>
+			<img src="../assets/img/forwardslash/nmap.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Disini kita hanya akan mendapatkan 2 service saja yaitu ssh dan http (simple, dan ini yang saya suka XD)
+		</section>
+		
+		<section id="gobuster">
+			Langsung saja kita cek pada bagian http
+			<img src="../assets/img/forwardslash/web.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Hanya sebuah tampilan web korban deface, karna tidak mendapat apa apa maka langsung enum pada bagian directory
+			<img src="../assets/img/forwardslash/note-txt.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Kita mendapat sebuah catatan <i>note.txt</i>  yang isinya:
+			<div class="container bg-dark p-2 my-2 rounded">
+					<pre>
+Pain, we were hacked by some skids that call themselves the "Backslash Gang"... I know... That name... 
+Anyway I am just leaving this note here to say that we still have that backup site so we should be fine.
+
+-chiv
+					</pre>
+				</div>
+			Disitu tertulis bahwa mereka masih memiliki backup pada <i>backup site</i> maka langsung saja kita tambahkan subdomain pada /etc/hosts <i>backup.forwardslash.htb</i>
+		</section>
+
+		<section id="lfi">
+			Setelah membuka subdomain tersebut.. kita akan langsung disuguhkan dengan halaman login..	
+			<img src="../assets/img/forwardslash/login.png" class="py-2 rounded mx-auto d-block img-fluid">
+			setelah mencoba kredensial kramat <i>(admin:admin, dst)</i> tidak bisa, maka saya putuskan untuk enum pada bagian directory lagi <br>
+			<kbd><code>gobuster dir -u http://backup.forwardslash.htb/ -w /usr/share/dirb/wordlists/common.txt -t 50 -x php,html,txt -o gobuster/backup</code></kbd>
+			<img src="../assets/img/forwardslash/gobuster.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Disitu terlihat ada register page maka langsung menuju bagian situ, sebenarnya saya mencoba berkeliling ke beberapa page semisal dev,api, dsb. (access denied), jadi langsung saja register lalu login dengan akun yang sama.
+			<img src="../assets/img/forwardslash/welcome.png" class="py-2 rounded mx-auto d-block img-fluid">
+			kita akan mendapatkan page yang menarik disini yaitu pada bagian change profile picture
+			<img src="../assets/img/forwardslash/profile-picture.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Disini kita lihat form-nya di-disable kita bisa inspect element, sebenarnya sudah sangat jelas kalau ini memiliki kerentanan LFI. Selanjutnya kita akan menggunakan burp suite untuk mengeksekusinya
+			<img src="../assets/img/forwardslash/burp-etcpasswd.png" class="py-2 rounded mx-auto d-block img-fluid">
+			Ternyata benar LFI :D. Karna disini kita tidak bisa melakukan RCE melalui LFI  maka saya berasumsi untuk mengecek pada page2 yang sudah kita dapatkan tadi (dev, api, dsb)
+			<img src="../assets/img/forwardslash/burp-dec-denied.png" class="py-2 rounded mx-auto d-block img-fluid">
+			disitu tertulis access denied.. masih sama seperti awalnya.. maka saya membuka payloadallofthings <a href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/File%20Inclusion#wrapper-phpfilter">PayloadAllofThings</a>
+			<img src="../assets/img/forwardslash/burp-wrapper.png" class="py-2 rounded mx-auto d-block img-fluid">
+			setelah di convert dari bas64
+			<img src="../assets/img/forwardslash/cred-chiv.png" class="py-2 rounded mx-auto d-block img-fluid">
+			kita mendapatkan credential untuk login ssh
+		</section>
+
+		<section id="user">
+			Sebenarnya pada bagian user ini saya mendapatkan keberuntungan.. yaitu saya mendapatkan script yang tergeletak pada bagian home directory wkwkwkkw... setelah di eksekusi maka langsung muncul apa yang kita harapkan, yaitu user yang terdapat user.txt file-nya (mungkin ini yang bikin box ini gak jadi masalah buat saya) tapi disini saya akan menjelaskan caranya <br>
+			kita akan menggunakan <a href="https://github.com/diego-treitos/linux-smart-enumeration">LSE</a> untuk enum
+			<img src="../assets/img/forwardslash/lse-backup.png" class="py-2 rounded mx-auto d-block img-fluid">
+			terdapat file yang menarik yaitu backup.. kita coba jalankan
+			<div class="container bg-dark p-2 my-2 rounded">
+					<pre>
+chiv@forwardslash:/var/www/backup.forwardslash.htb$ backup
+----------------------------------------------------------------------
+	Pains Next-Gen Time Based Backup Viewer
+	v0.1
+	NOTE: not reading the right file yet, 
+	only works if backup is taken in same second
+----------------------------------------------------------------------
+
+Current Time: 11:56:51
+ERROR: d99c2c7f8fe2c01787f88e9974e4f1fa Does Not Exist or Is Not Accessible By Me, Exiting...
+					</pre>
+				</div>
+			Setiap kali kita menjalankan script ini, kita mendapatkan MD5Sum baru dan jika kita crack md5 pada bagian error-nya maka hanya akan menampilkan waktu.. Jadi pemikirannya di sini adalah bahwa jika kita memberinya file backup ini dengan MD5 yang sesuai, kita dapat 'mendekripsi' backup tersebut. kita perlu mendapatkan MD5 saat ini dan menautkannya ke file target 
+			<div class="container bg-dark p-2 my-2 rounded">
+					<pre>
+t="$(date +%H:%M:%S | tr -d '\n' | md5sum | tr -d ' -')"
+ln -s /var/backups/config.php.bak /home/chiv/$t
+backup
+					</pre>
+				</div> 
+			Rincian singkat:
+			Baris pertama adalah memberikan tanggal / waktu saat ini dan Jumlah MD5.
+			Selanjutnya kita menautkan target config.php.bak ke variabel waktu itu.
+			Lalu kami memanggil backup tool.
+			setelah dijalankan maka kita akan mendapat password dari pain
+			<img src="../assets/img/forwardslash/pain-pass.png" class="py-2 rounded mx-auto d-block img-fluid">
+		</section>
+
+		<section id="gaining-root">
+			sekarang kita bisa login ke user pain <br>
+			<kbd><code>sudo -l</code></kbd>
+			<div class="container bg-dark p-2 my-2 rounded">
+					<pre>
+Matching Defaults entries for pain on forwardslash:
+env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User pain may run the following commands on forwardslash:
+(root) NOPASSWD: /sbin/cryptsetup luksOpen *
+(root) NOPASSWD: /bin/mount /dev/mapper/backup ./mnt/
+(root) NOPASSWD: /bin/umount ./mnt/
+					</pre>
+				</div>
+			lalu saya coba membuka recovery image.. tapi ternyata membutuhkan password untuk membukanya
+			<img src="../assets/img/forwardslash/wrong-passw.png" class="py-2 rounded mx-auto d-block img-fluid">
+			terdapat file pada home encrypted.py
+			<div class="container bg-dark p-2 my-2 rounded">
+				<pre>
+def encrypt(key, msg):
+    key = list(key)
+    msg = list(msg)
+    for char_key in key:
+        for i in range(len(msg)):
+            if i == 0:
+                tmp = ord(msg[i]) + ord(char_key) + ord(msg[-1])
+            else:
+                tmp = ord(msg[i]) + ord(char_key) + ord(msg[i-1])
+
+            while tmp > 255:
+                tmp -= 256
+            msg[i] = chr(tmp)
+    return ''.join(msg)
+
+def decrypt(key, msg):
+    key = list(key)
+    msg = list(msg)
+    for char_key in reversed(key):
+        for i in reversed(range(len(msg))):
+            if i == 0:
+                tmp = ord(msg[i]) - (ord(char_key) + ord(msg[-1]))
+            else:
+                tmp = ord(msg[i]) - (ord(char_key) + ord(msg[i-1]))
+                tmp += 256
+            while tmp < 0:
+            msg[i] = chr(tmp)
+    return ''.join(msg)
+
+
+print encrypt('REDACTED', 'REDACTED')
+print decrypt('REDACTED', encrypt('REDACTED', 'REDACTED'))
+					</pre>
+				</div>
+			dengan melakukan sedikit scripting untuk bruteforce
+			<div class="container bg-dark p-2 my-2 rounded">
+					<pre>
+def decrypt(key, msg):
+    key = list(key)
+    msg = list(msg)
+    for char_key in reversed(key):
+        for i in reversed(range(len(msg))):
+            if i == 0:
+                tmp = ord(msg[i]) - (ord(char_key) + ord(msg[-1]))
+            else: 
+                tmp = ord(msg[i]) - (ord(char_key) + ord(msg[i-1]))
+            while tmp < 0:
+                tmp += 256
+            msg[i] = chr(tmp)
+    return ''.join(msg)
+
+with open ('./ciphertext', 'r') as f:
+    a = f.read()
+    for i in range(1, 165):
+        for j in range(33, 127):
+            key = chr(j) * i
+            msg = decrypt(key, a)
+            if 'the' in msg:
+                print(msg)
+                exit()
+					</pre>
+			</div>
+			maaf kalo scriptnya agak berantakan wkwkwkw <br>
+			kita akan mendapatkan passwordnya: cB!6%sdH8Lj^@Y*$C2cf <br>
+			langsung saja kita buka file image nya, lalu mount ke mnt <br>
+			<kbd><code>sudo /sbin/cryptsetup luksOpen /var/backups/recovery/encrypted_backup.img backup</code></kbd> <br>
+			<kbd><code>sudo /bin/mount /dev/mapper/backup ./mnt/</code></kbd>
+			<img src="../assets/img/forwardslash/id_rsa.png" class="py-2 rounded mx-auto d-block img-fluid">
+			dan ternyata kita pun mendapatkan ssh private key dari si root ini. kita hanya tinggal login melalui ssh dan mengambil root.txt
+		</section>
+
+	</div>
+	<div class="copyright">made with &hearts; by oreosec &copy;2020</div> 
+
+</body>
+<script src="../assets/js/bootstrap.min.js"></script>
+<script src="../assets/js/jquery.js"></script>
+<script src="../assets/js/bootstrap.bundle.min.js"></script>
+<script src="../assets/js/particles.min.js"></script>
+<script src="../assets/js/app.js"></script>
+</html>
