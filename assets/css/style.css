@@ -236,6 +236,8 @@ nav{
     font-family: Raleway;
     color: #e52e71;
 }
+
+
 .wrapper-flat{
     display: flex;
     align-items:center;
@@ -260,5 +262,9 @@ nav{
     .flat-image{
         height: 100px;
         width: 100px;
+    }
+    .whoami{
+        height: 100px;
+        width : 100px;
     }
 }
