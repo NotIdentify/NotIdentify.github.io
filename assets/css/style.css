@@ -25,10 +25,17 @@ nav{
 }
 #article{
     width: 90% !important;
+    padding: 5rem;
     margin: 50px 30px !important;
     overflow-x: auto;
+    background-color: #1d1825 !important;
     z-index: 3;
 }
+#article h2{
+    color: #ff8a00;
+    font-weight: bold;
+}
+
 .bg-green{
     background: linear-gradient(to right, #8A2387, #E94057, #F27121);
 }
@@ -42,6 +49,9 @@ nav{
 }
 .btn-own:hover{
     background: linear-gradient(to left,#ff8a00,#e52e71) !important;
+}
+.btn-search{
+    border: solid 1px #e84393 !important;
 }
 .bg-contain{
     background: #100e17;
@@ -163,7 +173,7 @@ nav{
     transition: width 0.4s ease-in-out;
 }  
 .search:focus {
-    width: 100%;
+    width: 50%;
 }
 .section{
     display: flex;
@@ -236,7 +246,10 @@ nav{
     font-family: Raleway;
     color: #e52e71;
 }
-
+/* .title-text{
+    text-transform: uppercase;
+    font-weigth: 300;    
+} */
 
 .wrapper-flat{
     display: flex;
@@ -245,6 +258,9 @@ nav{
 }
 
 @media screen and (max-width: 800px){
+    #article{
+        padding: 2rem;
+    }
     .card{
         width: 15rem !important;
     }

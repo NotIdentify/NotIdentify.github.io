@@ -46,16 +46,16 @@
 
 	<div id="particles-js"></div>
 	<div class="container bg-green rounded p-4 shadow-own position-absolute title-article">
-		<h1>forwardslash htb</h1>
+		<h1 class="title-text">forwardslash htb</h1>
 	</div>
-	<div class="container w-75 p-5 m-5 bg-light rounded text-dark shadow-own" id="article">
+	<div class="container w-75 m-5 bg-light rounded text-light shadow-own" id="article">
 		<i class="far fa-calendar" aria-hidden="true"></i> <small class="text-muted">July 2020</small> <br><br>
 
 		<strong>Bismillah..</strong> <br>
 		Sebagai informasi mesin ini bernama Forward Slash dengan OS linux dengan total 40 points (hard). Adapun seperti biasanya, tantangan dari HackThebox adalah mengambil alih akses penuh mesin (privilege escalation) untuk mendapatkan user.txt dan root.txt <br> <br>
-		<h1>Intro</h1>
+		<h2>Intro</h2>
 		Box yang relatif tidak terlalu susah (mungkin karna saya beruntung wkwkwk). Perjalanan  Forwardslash dimulai dengan mencari file. Lalu menambahkan subdomain, dan kemudian bypass lfi pada bagian client-side dan filter. Mendapat file yang memiliki kredensial untuk pengguna. File tersebut dimiliki oleh pengguna. Login ssh ke mesin dan enum menggunakan lse, melakukan timestamp dan pada file config.php.bak dengan timestamp itu kami mendapat user credential. Mendapatkan <i>key</i> setelah menganalisis python script. User dapat me-mount gambar dengan hak istimewa root dan karenanya kami mendapat password ssh pribadi dari root pengguna. 
-		<h1>This content</h1>
+		<h2>This content</h2>
 		<ul class="content-list">
 			<li><a href="#nmap">Nmap port scanning</a></li>
 			<li><a href="#gobuster">Enum web server</a></li>
@@ -63,10 +63,10 @@
 			<li><a href="#user">Gaining user</a></li>
 			<li><a href="#gaining-root">Gaining root</a></li>
 		</ul>
-		<h1>Recon</h1>	
+		<h2>Recon</h2>	
 		
 		<section id="nmap">
-			<kbd><code>nmap -sCV -oN nmap/serv</code></kbd>
+			<blockquote><kbd><code>nmap -sCV -oN nmap/serv</code></kbd></blockquote>
 			<img src="../assets/img/forwardslash/nmap.png" class="py-2 rounded mx-auto d-block img-fluid">
 			Disini kita hanya akan mendapatkan 2 service saja yaitu ssh dan http (simple, dan ini yang saya suka XD)
 		</section>
@@ -92,7 +92,8 @@ Anyway I am just leaving this note here to say that we still have that backup si
 			Setelah membuka subdomain tersebut.. kita akan langsung disuguhkan dengan halaman login..	
 			<img src="../assets/img/forwardslash/login.png" class="py-2 rounded mx-auto d-block img-fluid">
 			setelah mencoba kredensial kramat <i>(admin:admin, dst)</i> tidak bisa, maka saya putuskan untuk enum pada bagian directory lagi <br>
-			<kbd><code>gobuster dir -u http://backup.forwardslash.htb/ -w /usr/share/dirb/wordlists/common.txt -t 50 -x php,html,txt -o gobuster/backup</code></kbd>
+
+			<blockquote><kbd><code>gobuster dir -u http://backup.forwardslash.htb/ -w /usr/share/dirb/wordlists/common.txt -t 50 -x php,html,txt -o gobuster/backup</code></kbd></blockquote>
 			<img src="../assets/img/forwardslash/gobuster.png" class="py-2 rounded mx-auto d-block img-fluid">
 			Disitu terlihat ada register page maka langsung menuju bagian situ, sebenarnya saya mencoba berkeliling ke beberapa page semisal dev,api, dsb. (access denied), jadi langsung saja register lalu login dengan akun yang sama.
 			<img src="../assets/img/forwardslash/welcome.png" class="py-2 rounded mx-auto d-block img-fluid">
@@ -146,7 +147,7 @@ backup
 
 		<section id="gaining-root">
 			sekarang kita bisa login ke user pain <br>
-			<kbd><code>sudo -l</code></kbd>
+			<blockquote><kbd><code>sudo -l</code></kbd></blockquote>
 			<div class="container bg-dark p-2 my-2 rounded">
 					<pre>
 Matching Defaults entries for pain on forwardslash:
@@ -228,8 +229,8 @@ with open ('./ciphertext', 'r') as f:
 			maaf kalo scriptnya agak berantakan wkwkwkw <br>
 			kita akan mendapatkan passwordnya: cB!6%sdH8Lj^@Y*$C2cf <br>
 			langsung saja kita buka file image nya, lalu mount ke mnt <br>
-			<kbd><code>sudo /sbin/cryptsetup luksOpen /var/backups/recovery/encrypted_backup.img backup</code></kbd> <br>
-			<kbd><code>sudo /bin/mount /dev/mapper/backup ./mnt/</code></kbd>
+			<blockquote><kbd><code>sudo /sbin/cryptsetup luksOpen /var/backups/recovery/encrypted_backup.img backup</code></kbd></blockquote> <br>
+			<blockquote><kbd><code>sudo /bin/mount /dev/mapper/backup ./mnt/</code></kbd></blockquote>
 			<img src="../assets/img/forwardslash/id_rsa.png" class="py-2 rounded mx-auto d-block img-fluid">
 			dan ternyata kita pun mendapatkan ssh private key dari si root ini. kita hanya tinggal login melalui ssh dan mengambil root.txt
 		</section>

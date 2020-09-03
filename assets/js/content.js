@@ -1,5 +1,5 @@
 var htmlasli = `
-<div class="card mb-4 col-sm" style="background:#16131c">
+<div class="card mb-4 col-sm" style="background:#16131c" id="$id$">
 	<div class="card-body">
 		<strong>$title$</strong>
 		<p class="card-text text-muted">
@@ -31,6 +31,7 @@ xmlhttp.onreadystatechange = function() {
 		for(var i=0; i<myArr.length; i++){
 			html = htmlasli.replace("$img$", myArr[i].img)
 			html = html.replace("$title$", myArr[i].title)
+			html = html.replace("$id$", myArr[i].id)
 			// html = html.replace("$text$", myArr[i].spoiler)
 			html = html.replace("$url$", myArr[i].url)
 			arrayContent.push(html)
@@ -44,3 +45,26 @@ xmlhttp.onreadystatechange = function() {
 		
 	}
 };
+
+function search() {
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.open("GET", "../content/content.txt", true);
+	xmlhttp.send();
+	xmlhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+			var myArr = JSON.parse(this.responseText);
+			var search = document.getElementById("search");
+			var value = search.value;
+			for(var i=0; i<myArr.length; i++){
+				var title = myArr[i].title.toLowerCase();
+				var id = myArr[i].id;
+				if(title.search(value.toLowerCase()) > -1)
+				{
+					window.location.href = "#"+id;
+				}
+				
+			}
+			
+		}
+	};
+}

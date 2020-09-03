@@ -26,5 +26,4 @@
 			],
 		"url": "book-htb-indonesia.html"
 	}
-	
 ]
