@@ -11,6 +11,8 @@
 	<link rel="stylesheet" href="assets/font/Raleway/Raleway.css">
 	<link rel="stylesheet" href="assets/font/josefin-slab/josefin-slab.css">
 	<link rel="icon" type="image/png" href="assets/img/oreosec.png"/>
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 	<script src="assets/font/fontawesome-free-5.0.2/svg-with-js/js/fontawesome-all.min.js"></script>
 </head>
 <body>
@@ -33,9 +35,6 @@
 							  <a class="dropdown-item text-light" href="#sec">Pentest</a>
 							  <a class="dropdown-item text-light" href="#ctf">CTF-witeup</a>
 							  <a class="dropdown-item text-light" href="#code">Coding</a>
-							  <div class="dropdown-divider"></div>
-							  <a class="dropdown-item text-light" href="#">Show all</a>
-							</div>
 					</div>
 				</div>
 			</nav>
@@ -46,47 +45,60 @@
 				
 				<div class="caption">
 						
-					<span class="border">
-						oreosec
-						
-					</span>
+					<div data-aos="fade-up" style="transition: 1s all">
+						<span class="border">
+							oreosec
+						</span>
+					</div>
 				</div>
 			</section>
 			<!-- <div class="bg-dark pointer txt-title"><h1>Our Content</h1></div> -->
 			
 			<section class="section bg-contain shadow-own" id="sec">
-				<div class="flat-image hidden-right half-circle" id="sec-img" style="transition: .5s all">
-					<img src="assets/img/flat/shield-flat.png" class="flatimage">
+				<div data-aos="fade-right" style="transition: 1s all">
+					<div class="flat-image half-circle" id="sec-img">
+						<img src="assets/img/flat/shield-flat.png" class="flatimage">
+					</div>
 				</div>
-				<div class="read-more">
-					<h1 class="txt-img">Pentest</h1>
-					Access security... <br>
-					 Access security grid <br>
-					YOU DIDN'T SAY THE MAGIC WORD! <br>
-
-					<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+				<div data-aos="fade-left" style="transition: 1s all">
+					<div class="read-more">
+						<h1 class="txt-img">Pentest</h1>
+						Access security... <br>
+						 Access security grid <br>
+						YOU DIDN'T SAY THE MAGIC WORD! <br>
+	
+						<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+					</div>
 				</div>
 			</section>
 
 			<section class="section shadow-own" id="ctf">
-				<div class="read-more">
-					<h1 class="txt-img">CTF <br> writeup</h1>
-					C4n y0u pwn th4 m4ch1n3? <br>
-					<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+				<div data-aos="fade-right" style="transition: 1s all">
+					<div class="read-more">
+						<h1 class="txt-img">CTF <br> writeup</h1>
+						C4n y0u pwn th4 m4ch1n3? <br>
+						<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+					</div>
 				</div>
-				<div class="flat-image hidden-left" id="ctf-img" style="transition: 1s all">
-					<img src="assets/img/flat/flag-1648819-1401301.png" class="flatimage">
+				<div data-aos="fade-left" style="transition: 1s all">
+					<div class="flat-image " id="ctf-img">
+						<img src="assets/img/flat/flag-1648819-1401301.png" class="flatimage">
+					</div>
 				</div>
 			</section>
 			
 			<section class="section bg-contain shadow-own" id="code">
-				<div class="flat-image hidden-right" id="code-img" style="transition: 2s all">
-					<img src="assets/img/flat/color+code+editor-131983707594807873.png" class="flatimage">
+				<div data-aos="fade-right" style="transition: 1s all">
+					<div class="flat-image" id="code-img">
+						<img src="assets/img/flat/color+code+editor-131983707594807873.png" class="flatimage">
+					</div>
 				</div>
-				<div class="read-more">
-					<h1 class="txt-img">Coding</h1>
-					No place like 127.0.0.1 <br>
-					<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+				<div data-aos="fade-left" style="transition: 1s all">
+					<div class="read-more">
+						<h1 class="txt-img">Coding</h1>
+						No place like 127.0.0.1 <br>
+						<a href="content/landpage.html" class="btn btn-own shadow">Read more</a>
+					</div>
 				</div>
 			</section>
 
@@ -102,7 +114,7 @@
 				</div>
 			</section>
 
-			<section class="section bg-contain shadow-own" id="about">
+			<section data-aos="fade-up" style="transition: 1s all;" class="section bg-contain shadow-own" id="about">
 				<h1 class="txt-title" style="color:white;opacity:.5;">Who am i?</h1>
 				<img src="assets/img/oreosec.png" class="whoami" style="filter: opacity(50%)">
 			</section>
@@ -110,10 +122,10 @@
 <div class="copyright">made with &hearts; by oreosec &copy;2020</div> 
 </body>
 <script>
-	alert("To maximize the appearance of the website please make sure for opening in desktop :)")
+	AOS.init();
 </script>
 <script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/style.js"></script>
+<!-- <script src="assets/js/style.js"></script> -->
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/particles.min.js"></script>

@@ -30,6 +30,7 @@ nav{
     overflow-x: auto;
     background-color: #1d1825 !important;
     z-index: 3;
+    min-height: 50vh;
 }
 #article h2{
     color: #ff8a00;
